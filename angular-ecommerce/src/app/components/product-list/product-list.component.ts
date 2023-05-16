@@ -4,22 +4,26 @@ import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-product-list',
-  templateUrl: './product-list.component.html',
+  templateUrl: './product-list-table.component.html',
+  //templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit { 
   products: Product[] = [];
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
     this.listProducts();
   }
-    listProducts(){
+    listProducts(){      
       this.productService.getProductList().subscribe(
         data => {
           this.products = data;
-        }
+         // console.log("Data Response ", this.products);
+        },
+      err=>{
+          console.log("Error in getting data", err);
+      }
       )
-      //throw new Error('Method not implemented');
     }
 }
